@@ -1,0 +1,6 @@
+node_modules/
+# Estensioni firmate e chiavi API di Mozilla: non vanno nel repository
+web-ext-artifacts/
+*.xpi
+*.api-key
+.env

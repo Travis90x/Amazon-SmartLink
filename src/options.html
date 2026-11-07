@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <title>Amazon Clean Tag</title>
+  </head>
+  <body>
+    <form id="form">
+      <label for="tag">Tag affiliato (Tracking ID)</label><br />
+      <input type="text" id="tag" placeholder="piattaforma-21" autocomplete="off" spellcheck="false" />
+      <button type="submit">Salva</button>
+      <p id="status" role="status"></p>
+      <p>
+        Le pagine prodotto di amazon.it diventano <code>https://www.amazon.it/dp/ASIN?tag=TUO-TAG</code>.
+        Se lasci il campo vuoto si usa <code>piattaforma-21</code>.
+      </p>
+    </form>
+    <script src="cleaner.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>

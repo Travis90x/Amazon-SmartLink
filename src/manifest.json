@@ -1,0 +1,37 @@
+{
+  "manifest_version": 2,
+  "name": "Amazon Clean Tag",
+  "short_name": "AmazonCleanTag",
+  "version": "1.0.0",
+  "description": "Pulisce i link dei prodotti su amazon.it (/dp/ASIN) e imposta il tuo tag affiliato.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "amazon-clean-tag@addon.local",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "*://www.amazon.it/*",
+    "*://amazon.it/*"
+  ],
+  "background": {
+    "scripts": ["cleaner.js", "background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://www.amazon.it/*", "*://amazon.it/*"],
+      "js": ["cleaner.js", "pagecleaner.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true
+  }
+}
