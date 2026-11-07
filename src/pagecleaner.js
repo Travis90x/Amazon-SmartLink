@@ -38,7 +38,8 @@ browser.storage.sync
   })
   .then(() => {
     tidyAddressBar();
-    // Amazon cambia l'indirizzo anche dopo il caricamento: un controllo al secondo costa pochissimo
-    // (confronto tra due stringhe) e copre sia th/psc sia il cambio di variante.
-    setInterval(tidyAddressBar, 1000);
+    // Amazon cambia l'indirizzo anche a diversi secondi dal caricamento (th/psc, cambio di variante)
+    // e il browser non avvisa gli script di pagina: si controlla ogni quarto di secondo.
+    // Costa pochissimo (confronto tra due stringhe) e lascia l'indirizzo sporco al massimo per un istante.
+    setInterval(tidyAddressBar, 250);
   });

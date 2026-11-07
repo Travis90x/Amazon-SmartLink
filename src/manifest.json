@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Amazon Clean Tag",
-  "short_name": "AmazonCleanTag",
+  "name": "Amazon SmartLink",
+  "short_name": "AmazonSmartLink",
   "version": "1.0.0",
   "description": "Pulisce i link dei prodotti su amazon.it (/dp/ASIN) e imposta il tuo tag affiliato.",
   "browser_specific_settings": {

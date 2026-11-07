@@ -1,4 +1,4 @@
-# Amazon Clean Tag
+# Amazon SmartLink
 
 Estensione per Firefox: quando apri una pagina prodotto di **amazon.it** la sostituisce con il link pulito e con il tuo tag affiliato.
 
@@ -27,7 +27,7 @@ Il tag va dopo `?` (non dopo `&`): con `&` finirebbe dentro il percorso e non sa
 Un'installazione permanente su Firefox normale richiede una firma di Mozilla (pubblicazione "non elencata" su addons.mozilla.org): non è stata fatta.
 
 ## Cambiare tag
-`about:addons` → Amazon Clean Tag → Preferenze. Il tag è lo stesso su tutti i tuoi Firefox se hai attivato la sincronizzazione dei componenti aggiuntivi.
+`about:addons` → Amazon SmartLink → Preferenze. Il tag è lo stesso su tutti i tuoi Firefox se hai attivato la sincronizzazione dei componenti aggiuntivi.
 
 ## Struttura
 - `src/cleaner.js` — logica pura (nessuna API del browser): riconosce la pagina prodotto e costruisce il link pulito.
@@ -38,3 +38,6 @@ Un'installazione permanente su Firefox normale richiede una firma di Mozilla (pu
 
 ## Origine
 L'idea viene da [AmazonAffiliateTagger](https://github.com/DorianGrey11/AmazonAffiliateTagger) (GPL v3, aggiunge solo il tag). Il codice è scritto da zero, senza copiarne.
+
+## Licenza
+[MIT](LICENSE).
