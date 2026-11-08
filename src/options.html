@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>Amazon SmartLink</title>
+    <style>
+      #stores { display: grid; grid-template-columns: max-content 1fr; gap: 6px 12px; align-items: center; margin: 12px 0; }
+      #stores input { width: 100%; max-width: 22em; }
+    </style>
   </head>
   <body>
     <form id="form">
-      <label for="tag">Tag affiliato (Tracking ID)</label><br />
-      <input type="text" id="tag" placeholder="piattaforma-21" autocomplete="off" spellcheck="false" />
-      <button type="submit">Salva</button>
-      <p id="status" role="status"></p>
       <p>
-        Le pagine prodotto di amazon.it diventano <code>https://www.amazon.it/dp/ASIN?tag=TUO-TAG</code>.
-        Se lasci il campo vuoto si usa <code>piattaforma-21</code>.
+        Amazon product pages become <code>https://www.amazon.&lt;domain&gt;/dp/ASIN?tag=YOUR-TAG</code>.
+        Enter the affiliate tag (Tracking ID) for each Amazon store you use. A store left empty gets the
+        clean link without any tag.
       </p>
+      <div id="stores"></div>
+      <button type="submit">Save</button>
+      <p id="status" role="status"></p>
     </form>
     <script src="cleaner.js"></script>
     <script src="options.js"></script>

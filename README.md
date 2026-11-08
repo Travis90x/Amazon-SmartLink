@@ -1,43 +1,55 @@
 # Amazon SmartLink
 
-Estensione per Firefox: quando apri una pagina prodotto di **amazon.it** la sostituisce con il link pulito e con il tuo tag affiliato.
+[Versione italiana (Italian version) → Readme_ITA.md](Readme_ITA.md)
+
+A Firefox extension: when you open a product page on an Amazon store (amazon.it, amazon.de, amazon.fr, amazon.co.uk, amazon.com and more) it replaces the address with a clean link and, if you set a tag for that store, adds your affiliate tag.
 
 ```
-https://www.amazon.it/Geox-SPHERICA-Scarpe-Ginnastica-C9997/dp/B08QMZZ6P3/?_encoding=UTF8&pd_rd_w=84gRT&...&tag=altro-21&th=1&psc=1
+https://www.amazon.it/Geox-SPHERICA-Scarpe-Ginnastica-C9997/dp/B08QMZZ6P3/?_encoding=UTF8&pd_rd_w=84gRT&...&tag=other-21&th=1&psc=1
                                   ↓
 https://www.amazon.it/dp/B08QMZZ6P3?tag=piattaforma-21
 ```
 
-Il tag va dopo `?` (non dopo `&`): con `&` finirebbe dentro il percorso e non sarebbe un parametro.
+The tag goes after `?`, not after `&`: with `&` it would end up inside the path and would not be a parameter.
 
-## Cosa fa e cosa non fa
-- Agisce solo su `www.amazon.it` e `amazon.it`, solo sulle pagine prodotto (`/dp/ASIN`, `/gp/product/ASIN`, `/gp/aw/d/ASIN`, `/product/ASIN`, `/exec/obidos/ASIN/ASIN`) e solo sulle richieste GET.
-- Toglie ogni parametro (`ref_`, `pd_rd_*`, `th`, `psc`…), il titolo nel percorso e un eventuale tag di altri; tiene solo `?tag=`.
-- Il reindirizzamento avviene prima della richiesta di rete: una sola richiesta, nessun lampeggio.
-- Ricerca, carrello, account, ordini e altri siti Amazon non vengono toccati.
-- Dopo il caricamento Amazon rimette da solo `th=1&psc=1` nella barra degli indirizzi (e cambia l'indirizzo quando scegli una variante): un piccolo script di pagina li toglie di nuovo con `history.replaceState`. Cambia solo l'indirizzo mostrato, non ricarica e non tocca il contenuto della pagina.
-- Un `#frammento` da solo non provoca reindirizzamenti.
-- Se il campo del tag è vuoto o non valido si usa `piattaforma-21`, mai il tag di qualcun altro.
+## Supported stores
+amazon.it, .de, .fr, .es, .co.uk, .com, .nl, .se, .pl, .com.be, .ie, .ca, .com.au, .co.jp, .in, .com.br, .com.mx, .ae, .sa, .sg, .com.tr, .eg, .co.za (with and without `www.`).
 
-## Provarlo in Firefox
-1. Apri `about:debugging#/runtime/this-firefox`.
-2. «Carica componente aggiuntivo temporaneo…» e scegli `src\manifest.json`.
-3. Resta attivo fino al riavvio di Firefox.
+## One tag per store
+Affiliate tags belong to a single country: the tag of amazon.it is not valid on amazon.de. The options page has one field per store.
+- amazon.it starts with `piattaforma-21`; the other stores start empty.
+- A store with an empty field only gets cleaned (`https://www.amazon.de/dp/ASIN`) with no tag at all: the extension never puts another country's tag, or anyone else's, on a link.
+- A tag already present in the link is always replaced by yours, or removed if you have not set one for that store.
+- Observed in testing (4 out of 4 runs, from Italy, with made-up test tags): opening an `amazon.de` link that carries a tag, Amazon itself redirected to `amazon.it`, where the extension applies the amazon.it tag. That is Amazon's behaviour, not the extension's, and it is not guaranteed. With no tag set for that store, Amazon stays on `amazon.de`.
 
-Un'installazione permanente su Firefox normale richiede una firma di Mozilla (pubblicazione "non elencata" su addons.mozilla.org): non è stata fatta.
+## What it does and does not do
+- It acts only on product pages (`/dp/ASIN`, `/gp/product/ASIN`, `/gp/aw/d/ASIN`, `/product/ASIN`, `/exec/obidos/ASIN/ASIN`) and only on GET requests.
+- It removes every parameter (`ref_`, `pd_rd_*`, `th`, `psc`…) and the product title in the path; only `?tag=` is kept.
+- The redirect happens before the network request: a single request, no flicker.
+- After the page loads, Amazon puts `th=1&psc=1` back in the address bar (and changes the address when you pick a variant): a small page script removes them again with `history.replaceState`, checking every 250 ms. It only changes the displayed address; it does not reload the page or touch its content.
+- Search, cart, account, orders and other sites are left alone.
+- A `#fragment` alone never triggers a redirect.
 
-## Cambiare tag
-`about:addons` → Amazon SmartLink → Preferenze. Il tag è lo stesso su tutti i tuoi Firefox se hai attivato la sincronizzazione dei componenti aggiuntivi.
+## Try it in Firefox
+1. Open `about:debugging#/runtime/this-firefox`.
+2. Click "Load Temporary Add-on…" and choose `src\manifest.json`.
+3. It stays active until Firefox is restarted.
 
-## Struttura
-- `src/cleaner.js` — logica pura (nessuna API del browser): riconosce la pagina prodotto e costruisce il link pulito.
-- `src/background.js` — intercetta le richieste (`webRequest`, bloccante) e reindirizza.
-- `src/pagecleaner.js` — script di pagina: ripulisce la barra degli indirizzi dopo il caricamento.
-- `src/options.html`, `src/options.js` — pagina delle opzioni.
-- `test/cleaner.test.js` — prove di `cleaner.js`: dalla cartella del progetto, `node --test`.
+Settings are in `about:addons` → Amazon SmartLink → Preferences. The tags are shared across your Firefox installs if you turned on add-on sync.
 
-## Origine
-L'idea viene da [AmazonAffiliateTagger](https://github.com/DorianGrey11/AmazonAffiliateTagger) (GPL v3, aggiunge solo il tag). Il codice è scritto da zero, senza copiarne.
+## Why it is not on the Firefox store
+Mozilla's Add-on Policies (section 7, Monetization) do not allow modifying web content or redirecting to insert affiliate tags, and they apply to extensions distributed outside the store as well. Regular Firefox only installs extensions signed by Mozilla, so a permanent install is not provided. Alternatives: Firefox Developer Edition, Nightly or ESR with `xpinstall.signatures.required` set to `false` in `about:config`.
 
-## Licenza
+## Layout
+- `src/cleaner.js` — pure logic (no browser APIs): list of stores, product page detection, clean link construction.
+- `src/background.js` — intercepts requests (`webRequest`, blocking) and redirects.
+- `src/pagecleaner.js` — page script: tidies the address bar after the page loads.
+- `src/options.html`, `src/options.js` — options page.
+- `src/icons/` — icons (PNG 16, 32, 48, 96, 128 and the SVG source), generated by `tools/make_icons.py` (`python -I tools/make_icons.py`, no external libraries).
+- `test/cleaner.test.js` — tests for `cleaner.js` and for consistency with the manifest: from the project folder, run `node --test`.
+
+## Origin
+The idea comes from [AmazonAffiliateTagger](https://github.com/DorianGrey11/AmazonAffiliateTagger) (GPL v3, only adds the tag). The code is written from scratch, without copying it.
+
+## License
 [MIT](LICENSE).

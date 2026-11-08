@@ -3,13 +3,22 @@
   "name": "Amazon SmartLink",
   "short_name": "AmazonSmartLink",
   "version": "1.0.0",
-  "description": "Pulisce i link dei prodotti su amazon.it (/dp/ASIN) e imposta il tuo tag affiliato.",
+  "description": "Cleans Amazon product links (/dp/ASIN) and adds your affiliate tag, one tag per Amazon store.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  },
   "browser_specific_settings": {
     "gecko": {
       "id": "amazon-clean-tag@addon.local",
       "strict_min_version": "140.0",
       "data_collection_permissions": {
-        "required": ["none"]
+        "required": [
+          "none"
+        ]
       }
     }
   },
@@ -18,15 +27,112 @@
     "webRequestBlocking",
     "storage",
     "*://www.amazon.it/*",
-    "*://amazon.it/*"
+    "*://amazon.it/*",
+    "*://www.amazon.de/*",
+    "*://amazon.de/*",
+    "*://www.amazon.fr/*",
+    "*://amazon.fr/*",
+    "*://www.amazon.es/*",
+    "*://amazon.es/*",
+    "*://www.amazon.co.uk/*",
+    "*://amazon.co.uk/*",
+    "*://www.amazon.com/*",
+    "*://amazon.com/*",
+    "*://www.amazon.nl/*",
+    "*://amazon.nl/*",
+    "*://www.amazon.se/*",
+    "*://amazon.se/*",
+    "*://www.amazon.pl/*",
+    "*://amazon.pl/*",
+    "*://www.amazon.com.be/*",
+    "*://amazon.com.be/*",
+    "*://www.amazon.ie/*",
+    "*://amazon.ie/*",
+    "*://www.amazon.ca/*",
+    "*://amazon.ca/*",
+    "*://www.amazon.com.au/*",
+    "*://amazon.com.au/*",
+    "*://www.amazon.co.jp/*",
+    "*://amazon.co.jp/*",
+    "*://www.amazon.in/*",
+    "*://amazon.in/*",
+    "*://www.amazon.com.br/*",
+    "*://amazon.com.br/*",
+    "*://www.amazon.com.mx/*",
+    "*://amazon.com.mx/*",
+    "*://www.amazon.ae/*",
+    "*://amazon.ae/*",
+    "*://www.amazon.sa/*",
+    "*://amazon.sa/*",
+    "*://www.amazon.sg/*",
+    "*://amazon.sg/*",
+    "*://www.amazon.com.tr/*",
+    "*://amazon.com.tr/*",
+    "*://www.amazon.eg/*",
+    "*://amazon.eg/*",
+    "*://www.amazon.co.za/*",
+    "*://amazon.co.za/*"
   ],
   "background": {
-    "scripts": ["cleaner.js", "background.js"]
+    "scripts": [
+      "cleaner.js",
+      "background.js"
+    ]
   },
   "content_scripts": [
     {
-      "matches": ["*://www.amazon.it/*", "*://amazon.it/*"],
-      "js": ["cleaner.js", "pagecleaner.js"],
+      "matches": [
+        "*://www.amazon.it/*",
+        "*://amazon.it/*",
+        "*://www.amazon.de/*",
+        "*://amazon.de/*",
+        "*://www.amazon.fr/*",
+        "*://amazon.fr/*",
+        "*://www.amazon.es/*",
+        "*://amazon.es/*",
+        "*://www.amazon.co.uk/*",
+        "*://amazon.co.uk/*",
+        "*://www.amazon.com/*",
+        "*://amazon.com/*",
+        "*://www.amazon.nl/*",
+        "*://amazon.nl/*",
+        "*://www.amazon.se/*",
+        "*://amazon.se/*",
+        "*://www.amazon.pl/*",
+        "*://amazon.pl/*",
+        "*://www.amazon.com.be/*",
+        "*://amazon.com.be/*",
+        "*://www.amazon.ie/*",
+        "*://amazon.ie/*",
+        "*://www.amazon.ca/*",
+        "*://amazon.ca/*",
+        "*://www.amazon.com.au/*",
+        "*://amazon.com.au/*",
+        "*://www.amazon.co.jp/*",
+        "*://amazon.co.jp/*",
+        "*://www.amazon.in/*",
+        "*://amazon.in/*",
+        "*://www.amazon.com.br/*",
+        "*://amazon.com.br/*",
+        "*://www.amazon.com.mx/*",
+        "*://amazon.com.mx/*",
+        "*://www.amazon.ae/*",
+        "*://amazon.ae/*",
+        "*://www.amazon.sa/*",
+        "*://amazon.sa/*",
+        "*://www.amazon.sg/*",
+        "*://amazon.sg/*",
+        "*://www.amazon.com.tr/*",
+        "*://amazon.com.tr/*",
+        "*://www.amazon.eg/*",
+        "*://amazon.eg/*",
+        "*://www.amazon.co.za/*",
+        "*://amazon.co.za/*"
+      ],
+      "js": [
+        "cleaner.js",
+        "pagecleaner.js"
+      ],
       "run_at": "document_idle"
     }
   ],
