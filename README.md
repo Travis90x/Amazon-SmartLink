@@ -17,7 +17,7 @@ It comes in two forms, with the same cleaning rules:
 1. **[Tampermonkey](https://www.tampermonkey.net/) userscript (recommended).** It stays installed through Firefox updates and restarts.
 2. **Firefox extension.** It rewrites the address before the request is sent, but on regular Firefox it can only be loaded temporarily and disappears at every restart (see "Why the extension is not on the Firefox store").
 
-> **Status: version 1.0.0.** The cleaning logic has unit tests. The extension was run in a real Firefox on amazon.it and amazon.de. The userscript was run in a real Firefox with a stand-in for Tampermonkey's `GM_*` functions; the check inside Tampermonkey itself is still to be completed.
+> **Status: version 1.0.0.** The cleaning logic has unit tests. The extension was run in a real Firefox on amazon.it and amazon.de. The userscript was run in a real Firefox with a stand-in for Tampermonkey's `GM_*` functions, and then installed in Tampermonkey, where the author confirmed it works.
 
 ## Install the userscript (recommended)
 

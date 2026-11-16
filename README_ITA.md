@@ -17,7 +17,7 @@ Ci sono due forme, con le stesse regole di pulizia:
 1. **Userscript per [Tampermonkey](https://www.tampermonkey.net/) (consigliato).** Resta installato con gli aggiornamenti e i riavvii di Firefox.
 2. **Estensione per Firefox.** Riscrive l'indirizzo prima che parta la richiesta, ma su Firefox normale si può caricare solo in modo temporaneo e sparisce a ogni riavvio (vedi «Perché l'estensione non è sullo store di Firefox»).
 
-> **Stato: versione 1.0.0.** La logica di pulizia ha test automatici. L'estensione è stata provata in un Firefox vero su amazon.it e amazon.de. Lo userscript è stato provato in un Firefox vero con un sostituto delle funzioni `GM_*` di Tampermonkey; la verifica dentro Tampermonkey vero è ancora da completare.
+> **Stato: versione 1.0.0.** La logica di pulizia ha test automatici. L'estensione è stata provata in un Firefox vero su amazon.it e amazon.de. Lo userscript è stato provato in un Firefox vero con un sostituto delle funzioni `GM_*` di Tampermonkey e poi installato in Tampermonkey, dove l'autore ha confermato che funziona.
 
 ## Installare lo userscript (consigliato)
 
